@@ -14,6 +14,7 @@
     -git add .
 --执行提交
     -git commit -m "commit"
+    -git commit -am "commit"
 --查看提交记录
     -git log 【全部信息】
     -git log --pretty=oneline 【简要信息】
