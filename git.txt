@@ -1,0 +1,10 @@
+--------云端IDE同步GIT测试---------
+
+
+--配置GIT
+    -git config --global user.name "mmys-zh"
+    -git config --global user.email "2577271950@qq.com"
+--忽略文件配置
+    .gitignore文件
+--初始化仓库
+    -git init
