@@ -20,3 +20,4 @@
     -git log --pretty=oneline 【简要信息】
 --撤销修改
     -git checkout .
+--测试用
