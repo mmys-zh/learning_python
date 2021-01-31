@@ -1,0 +1,33 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+    <h1>register an account</h1>
+{% endblock header %}
+
+{% block content %}
+    <form action="{% url 'users:register' %}" method='post' class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">register</button>
+        {% endbuttons %}
+        <input type="hidden" name="next" value="{% url 'learning_logs:index' %}"/> 
+    </form>
+{% endblock content %}
+
+
+<!-- {% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+  <form action="{% url 'users:register' %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p}} 
+        修饰符as_p让django以段落格式渲染所有表单元素
+        <button name="submit">register</button>
+        <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+        一个隐藏的表单元素，实参value告诉django在用户登陆成功后将其重定向到什么地方
+    </form>
+
+{% endblock content %} -->

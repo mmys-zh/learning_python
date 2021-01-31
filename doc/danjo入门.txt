@@ -1,0 +1,152 @@
+-----------django入门-------
+
+
+--什么是django
+    一个web框架 【一套用于帮助开发交互式网站的工具】
+    django能够响应网页请求，能更轻松地读写数据库、管理用户等
+
+--建立项目
+    首先需要以规范的方式对项目进行描述，再建立虚拟环境，以便在其中创建项目
+    --制定规范
+    完整的规范详细说明了项目的目标，阐述了项目的功能，并讨论了项目的外观和用户界面。规范应该突出重点，帮助避免项目偏离轨道
+    --建立虚拟环境
+    虚拟环境：系统的一个位置，可以在其中安装包，并将其与其他python包隔离。【将项目的库与其他项目分离是有益的】
+    创建虚拟环境的命令：python3 -m venv ll_env  【运行了venv模块，用来创建一个名为ll_env的虚拟环境,必须是python3环境】【不能运行时参考P375】
+    --激活虚拟环境
+    命令：source ll_env/bin/activate 【运行ll_env/bin中的脚本activate，当环境处于活动态时，环境名将包含在括号内】
+    --关闭虚拟环境
+    命令：deactivate
+    
+    --安装django
+    命令：pip install Django
+    --在django中创建项目
+    命令：django-admin.py startproject learning_log .  【末尾的.很重要，方便后期部署到服务器】
+    --创建数据库
+    命令：python3 manage.py migrate 【此命令也可使数据库与当前项目状态匹配，初始化时用于创建数据库】
+        --将修改数据库操作称为迁移数据库
+        --SQLite是一种单个文件式的数据库，主要用于编写简单程序
+    --查看项目
+    命令：python3 manage.py runserver
+
+--创建应用程序
+    Django项目由一系列应用程序组成，他们协同工作，让项目成为一个整体。
+    在manage.py所在的目录，激活虚拟环境，执行命令startapp
+        source ll_env/bin/activate
+        python manage.py startapp learning_logs
+        --命令startapp appname让Django建立创建应用程序所需的基础设施
+            --文件结构：
+                models.py--定义我们要在应用程序中管理的数据
+                admin.py --
+                vivews.py--
+                tests.py --
+                migrations --
+                __init__.py  
+        --定义模型
+            在models.py文件中定义管理
+        --激活模型 p381
+            要想使用模型，必须让Django将应用程序包含到项目
+            在settings.py文件中INSTALLED_APPS子段告诉django那些应用程序安装在项目中
+            通过将应用程序编组，在项目不断增大时，有助于对应用程序进行跟踪
+            --修改数据库
+            存储与模型有关的信息
+            命令：python manage.py makemigrations learning_logs
+            --迁移合并数据库
+            命令：python manage.py migrate
+        --tip:
+            需要修改管理的数据时采用的三个步骤：
+                --修改models.py
+                --对app文件调用修改数据库命令
+                --让django迁移合并数据库
+    
+    --django管理网站  admin site
+        --创建超级用户
+            命令：python manage.py createsuperuser
+            ----------超级用户信息---------------
+            用户名：ll_admin
+            邮箱地址：1853425218@qq.com
+            密码：mmys997926..
+        --向管理网站注册模型
+            对于自定义模型必须进行手工注册
+            -- 在admin.py文件中注册模型(Topic)
+                admin.site.register(Topic)
+        --添加主题
+            在管理网页中topics的主题网页添加主题
+                --Chess     国际象棋主题
+                --Rock Climbing     攀岩知识主题
+        --定义模型Entry
+            在models.py中定义模型
+        --迁移模型Entry
+            修改迁移合并数据库操作
+        --向管理网站注册Entry
+
+        --django shell 交互式会话终端环境
+            测试项目和排除其故障的理想之地
+            编写用户可请求的网页时，确认代码能获取到所需要的数据时，shell很有帮助
+            启用shell：python manage.py shell
+
+--创建网页：学习笔记主页
+    使用django创建网页的过程：
+        -定义URL模式
+            URL模式描述了URL是如何设计的，让django知道如何将浏览器请求与网站URL相匹配，以确定返回那个网页。
+            每个URL都被映射到特定的视图
+        -编写视图
+            视图函数获取并处理网页所需的数据，视图函数通常调用一个模板
+        -编写模板
+            模板生成浏览器能够理解的网页
+            tip:中看不中用的应用程序毫无意义
+    
+    --映射URL
+        用户通过在浏览器中输入URL以及单机链接来请求网页，因此需要确定项目需要哪些URL。
+            -主页的URL最重要，是用户用来访问项目的基础URL
+        --URL模式在django项目的urls.py文件配置
+            -在app项目文件中手动创建urls.py文件实现对URL模式的管理
+    --编写视图
+        视图函数接受请求中的信息，准备好生成网页所需的数据，再将这些数据发送给浏览器。【这种流程通常是使用定义了网页是什么样的模板实现的】
+        --视图在项目文件中views.py文件中配置
+    --编写模板
+        模板定义了网页的结构
+        模板指定了网页是什么样的，每当网页被请求时，django将填入相关的数据
+        模板让用户能够访问视图提供的任何数据  
+        --模板定义在项目文件中templates/learning_logs/文件夹中
+            tip:建立明确清晰易于阅读的结构是十分有重要的   
+
+    --tip:创建网页的过程将URL、视图、模板分离后，能够使我们分别考虑项目的不同方面，且在项目很大时，让各个参与者可以专注于其最擅长的方面。【数据库专家专注于模型，程序员专注于试图代码，Web设计人员专注于模板】
+
+--创建其他网页  
+    创建一个父模板，使项目中的其他模板继承他
+    --模板继承
+        创建网站时，将一些通用元素提取出来组成父模板，并让每个网页都继承这个模板。
+        这种方法能让程序员专注于开发每个网页的独特方面，还能让修改项目的整体外观变得容易
+        --父模板
+            在父模板中可使用任意多个块来预留空间，而子模版可根据需要定义相应数量的块
+        --子模版
+            子模版的第一行必须包含标签{% extends %}，让django知道它继承了哪个父模板
+        --模板继承的优点
+            父模板中包含通用元素，便于整体修改
+            子模板中包含特有元素，便于细节修改
+
+    --显示所有主题的页面
+        显示用户创建的所有主题，是第一个需要使用数据的网页
+        --url模式
+            topics/
+        --视图
+            topics()
+        --模板
+            topics.html
+    --显示特定主题的页面
+        显示特定主题的名称及该主题的所有条目
+        --url模式
+            使用主题的id属性来指出请求的是哪个主题
+            (?P<topic_id>\d+)/
+        --视图
+            topic()需要从数据库中获取指定的主题以及与之相关联的所有条目
+
+
+
+
+
+-----------参考文献---------
+1   http://djangoproject.com/
+2   https://docs.djangoproject.com/en/1.8/ref/models/fields  [模型中使用的各种字段]
+3   https://www.cnblogs.com/gerenboke/p/12091960.html [on_delete错误信息]
+4   https://docs.djangoproject.com/en/1.8/ref/templates/ [django模板文档]

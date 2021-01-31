@@ -1,0 +1,25 @@
+
+<!-- <p>Learning log</p> -->
+{% extends "learning_logs/base.html" %}
+
+{% block header %}
+    <div class="jumbotron">
+        <h1>Track your learning.</h1>
+    </div>
+{% endblock header %}
+
+{% block content %}
+<h2>
+    <a href="{% url 'users:register' %}">Register an account</a> to make your own Learning Log,and list the topics you're learning about.
+</h2>
+<h3>
+    learing log helps you keep track of your learning, for any topic you're learning about.
+</h3>
+<h3>
+    whenever you learn somthing new about a topic,make an entry summarizing what you've learned.
+</h3>
+{% endblock content %}
+
+<!-- {% block content %}
+<p>learing log helps you keep track of your learning, for any topic you,re learning about.</p>
+{% endblock content %} -->

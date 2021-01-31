@@ -1,0 +1,69 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习笔记</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-taarget="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+            </button>
+            <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- 通过if判断是否显示登陆页面 -->
+                {% if user.is_authenticated %}
+                    <li><a>Hello,{{ user.username }}.</a></li>
+                    <!-- 退出登录按钮 -->
+                    <li><a href="{% url 'users:logout' %}">log out</a></li>
+                {% else %}
+                    <li><a href="{% url 'users:register' %}">register</a></li>
+                    <li><a href="{% url 'users:login' %}">login in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主题内容 -->
+    <div class="container">
+        <div class="page-header">
+            {% block header %}{% endblock header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+</body>
+</html>
+<!-- <p>
+    <a href="{%url 'learning_logs:index'%}">Learning Log</a>|
+    <a href="{%url 'learning_logs:topics'%}">Topics</a>
+    通过if判断是否显示登陆页面
+    {% if user.is_authenticated %}
+        Hello,{{ user.username }}.
+        退出登录按钮
+        <a href="{% url 'users:logout' %}">log out</a>
+    {% else %}
+        <a href="{% url 'users:register' %}">register</a>
+        <a href="{% url 'users:login' %}">login in</a>
+    {% endif %}
+</p>
+模板标签：由大括号和百分号组成。
+    模板标签是一小段代码，生成要在网页中显示的信息
+{% block content %}{% endblock content %}
+一个预留块的开始和结束 -->

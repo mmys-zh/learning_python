@@ -1,0 +1,24 @@
+-------------设置APP样式---------------
+
+工具：使用bootstrap设置样式
+
+TIP：应用程序能够正常运行后，外观就显得重要了。因为漂亮专业的应用程序才能吸引用户去使用它
+
+
+--应用程序 django-bootstrap3
+    --安装django-bootstrap3
+        命令：pip install django-bootstrap3
+    --添加到项目文件settings.py
+        --对django-bootstrap3进行设置
+    --使用bootstrap来设置项目“学习笔记”的样式
+    --修改base.html
+    --修改具体页面样式
+
+
+
+
+
+
+
+-----------参考网址-------------------
+1   http://getbootstrap.com/
