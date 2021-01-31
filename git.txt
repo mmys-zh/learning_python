@@ -8,3 +8,12 @@
     .gitignore文件
 --初始化仓库
     -git init
+--检查状态
+    -git status
+--将文件加入到仓库
+    -git add .
+--执行提交
+    -git commit -m "commit"
+--查看提交记录
+    -git log 【全部信息】
+    -git log --pretty=oneline 【简要信息】
